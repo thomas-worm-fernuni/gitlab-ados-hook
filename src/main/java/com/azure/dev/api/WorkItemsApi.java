@@ -1128,7 +1128,7 @@ public class WorkItemsApi {
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
-        String[] localVarAuthNames = new String[] { "oauth2" };
+        String[] localVarAuthNames = new String[] { "oauth2", "accessToken" };
         return localVarApiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 

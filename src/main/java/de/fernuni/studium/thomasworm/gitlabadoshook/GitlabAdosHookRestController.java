@@ -18,12 +18,30 @@ public class GitlabAdosHookRestController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "Hello";
+        com.azure.dev.api.model.Link link = new com.azure.dev.api.model.Link();
+        link.setRel("Hyperlink");
+        link.setUrl("https://gitlab.com/commits/344h3ewd3ehie");
+        link.putAttributesItem("comment", "GitLab Commit 344h3ewd3ehie");
+
+        com.azure.dev.api.model.JsonPatchOperation op = new com.azure.dev.api.model.JsonPatchOperation();
+        op.setOp(com.azure.dev.api.model.JsonPatchOperation.OpEnum.ADD);
+        op.setPath("/relations/-");
+        op.setValue(link);
+
+        com.azure.dev.api.model.JsonPatchDocument doc = new com.azure.dev.api.model.JsonPatchDocument();
+        doc.add(op);
+        
+        com.azure.dev.api.JSON json = new com.azure.dev.api.JSON();
+        String jsonString = json.serialize(doc);
+
+        return "Hello <br /><pre>" + jsonString + "</pre>";
     }
 
-    @PostMapping("/{host}/{collection}/event")
+    @PostMapping("/{host}/{collection}/{project}/{pat}/event")
     public void newEvent(@PathVariable("host") String host,
                          @PathVariable("collection") String collection,
+                         @PathVariable("project") String project,
+                         @PathVariable("pat") String personalAccessToken,
                          HttpServletRequest request)
         throws GitLabApiException {
         webHookManager.handleEvent(request);

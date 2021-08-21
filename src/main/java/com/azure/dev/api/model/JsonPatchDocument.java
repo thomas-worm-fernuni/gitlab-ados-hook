@@ -15,6 +15,7 @@ package com.azure.dev.api.model;
 
 import java.util.Objects;
 import java.util.Arrays;
+import java.util.ArrayList;
 import io.swagger.annotations.ApiModel;
 
 /**
@@ -22,7 +23,7 @@ import io.swagger.annotations.ApiModel;
  */
 @ApiModel(description = "The JSON model for JSON Patch Operations")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-08-21T10:09:21.598267402Z[Etc/UTC]")
-public class JsonPatchDocument {
+public class JsonPatchDocument extends ArrayList<JsonPatchOperation> {
 
   @Override
   public boolean equals(Object o) {
