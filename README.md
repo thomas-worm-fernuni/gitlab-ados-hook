@@ -1,0 +1,1 @@
+# gitlab-ados-hook
